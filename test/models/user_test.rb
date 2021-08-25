@@ -31,4 +31,8 @@ class UserTest < ActiveSupport::TestCase
     assert_not @noEmail.valid?
   end
 
+  test "invalid if email taken" do
+    assert_not @noEmail.valid?
+  end
+
 end
