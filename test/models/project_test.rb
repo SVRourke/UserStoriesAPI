@@ -13,9 +13,6 @@ class ProjectTest < ActiveSupport::TestCase
   def teardown
     @user.destroy!
     @validProject.destroy!
-    @noName.destroy!
-    @noUser.destroy!
-    @duplicate.destroy!
   end
 
   test "valid project" do
