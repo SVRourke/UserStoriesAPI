@@ -1,5 +1,5 @@
 class Story < ApplicationRecord
-    validates :content, {presence: true}
+    validates :content, {presence: true, uniqueness: {scope: :epic, message: "duplicate story"}}
 
     belongs_to :epic
 end
