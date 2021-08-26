@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :stories
   resources :epics
   resources :projects
   resources :users
