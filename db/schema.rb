@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_26_115708) do
+ActiveRecord::Schema.define(version: 2021_08_26_123443) do
+
+  create_table "comments", force: :cascade do |t|
+    t.string "content"
+    t.string "commentable_type"
+    t.integer "commentable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
+  end
 
   create_table "epics", force: :cascade do |t|
     t.string "content"
@@ -31,7 +40,7 @@ ActiveRecord::Schema.define(version: 2021_08_26_115708) do
 
   create_table "stories", force: :cascade do |t|
     t.string "content"
-    t.boolean "complete"
+    t.boolean "complete", default: false
     t.integer "epic_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
