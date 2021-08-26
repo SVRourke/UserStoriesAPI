@@ -3,4 +3,5 @@ class Epic < ApplicationRecord
     
     belongs_to :project
     has_many :stories
+    has_many :comments, as: :commentable
 end

@@ -3,5 +3,5 @@ class Project < ApplicationRecord
     belongs_to :user
 
     has_many :epics, dependent: :destroy
-
+    has_many :comments, as: :commentable
 end
