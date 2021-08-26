@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_25_174626) do
+ActiveRecord::Schema.define(version: 2021_08_26_115708) do
+
+  create_table "epics", force: :cascade do |t|
+    t.string "content"
+    t.integer "project_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["project_id"], name: "index_epics_on_project_id"
+  end
 
   create_table "projects", force: :cascade do |t|
     t.string "name"
@@ -19,6 +27,15 @@ ActiveRecord::Schema.define(version: 2021_08_25_174626) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_projects_on_user_id"
+  end
+
+  create_table "stories", force: :cascade do |t|
+    t.string "content"
+    t.boolean "complete"
+    t.integer "epic_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["epic_id"], name: "index_stories_on_epic_id"
   end
 
   create_table "users", force: :cascade do |t|
