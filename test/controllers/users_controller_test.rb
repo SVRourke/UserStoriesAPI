@@ -3,6 +3,7 @@ require "test_helper"
 class UsersControllerTest < ActionDispatch::IntegrationTest
   
   def setup
+    User.destroy_all
     @user = User.create(username: "SVRourke", email: "s@s.com")
   end
 
@@ -19,13 +20,24 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get users_url
     users = @response.parsed_body
     assert users["users"].count > 0
-    
   end
 
-  # TODO: POST create is a valid path
-    # TODO: POST create returns a new user from the posted info
-    # TODO: POST create returns an error message if a user already exists
-    # TODO: POST create logs the user in on success
+  # index returns unauthorized if not logged in
+
+  test "POST create is a valid path" do
+    post users_url
+    assert_response :success
+  end
+
+  test "POST create with valid info creates a new user record" do
+    count = User.count
+    post users_url, params: {user: {username: "SVR", email: "sa@s.com"}}
+    # user = @repsonse.parsed_body["user"]
+    # assert user.username == "SVR"
+  end
+
+  # TODO: POST create returns an error message if a user already exists
+  # TODO: POST create logs the user in on success
 
 
   # TODO: read is a valid path
