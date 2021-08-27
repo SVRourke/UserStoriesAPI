@@ -1,7 +1,41 @@
 require "test_helper"
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+  
+  def setup
+    @user = User.create(username: "SVRourke", email: "s@s.com")
+  end
+
+  def teardown
+    User.destroy_all
+  end
+
+  test "index is a valid path" do 
+    get users_url
+    assert_response :success
+  end
+  
+  test "index returns a list of all users" do
+    get users_url
+    users = @response.parsed_body
+    assert users["users"].count > 0
+    
+  end
+
+  # TODO: POST create is a valid path
+    # TODO: POST create returns a new user from the posted info
+    # TODO: POST create returns an error message if a user already exists
+    # TODO: POST create logs the user in on success
+
+
+  # TODO: read is a valid path
+    # TODO: read returns the requested user
+    # TODO: read returns an error if no user exists
+    # TODO: read returns the requested user if authorized
+
+  # TODO: update is a valid path
+    # TODO: returns the user's new information on success
+    # TODO: a user can only update their own information
+  
+  # TODO: destroy is a valid path
 end
