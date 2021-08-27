@@ -4,6 +4,10 @@ class UsersController < ApplicationController
             users: User.all
         }
     end
+
+    def create
+        puts params.user
+    end
     # create
     # read
     # update
