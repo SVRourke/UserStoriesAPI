@@ -19,12 +19,16 @@ class UsersController < ApplicationController
             render json: {
                 error: user.errors.full_messages},
                 status: 422
-            
         end
-        
     end
-    # create
-    # read
+
+    def show
+        user = User.find(params[:id])
+
+        render json: {
+            user: user
+        }, status: 200
+    end
     # update
     # destroy
 end
