@@ -25,15 +25,15 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   # index returns unauthorized if not logged in
 
   test "POST create is a valid path" do
-    post users_url
+    post users_url, params: {user: {username: "kennethBeats", email: "kenny@thepolice.com"}}
     assert_response :success
   end
 
   test "POST create with valid info creates a new user record" do
     count = User.count
-    post users_url, params: {user: {username: "SVR", email: "sa@s.com"}}
-    # user = @repsonse.parsed_body["user"]
-    # assert user.username == "SVR"
+    post users_url, params: {user: {username: "RicoNasty", email: "rico@nasty.com"}}
+    data = @response.parsed_body
+    assert data["user"]["username"] == "RicoNasty"
   end
 
   # TODO: POST create returns an error message if a user already exists
