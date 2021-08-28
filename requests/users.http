@@ -1,12 +1,15 @@
 get http://localhost:3000/users
 
 
+get http://localhost:3000/users/6
+
+
 post http://localhost:3000/users
 Content-Type: application/json
 
 {
     "user": {
-        "username": "hello",
-        "email": "samuelvanrourke@gmail.com"
+        "username": "helo",
+        "email": "samuelrourke@gmail.com"
     }
 }
