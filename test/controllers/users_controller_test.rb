@@ -30,13 +30,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "POST create with valid info creates a new user record" do
-    count = User.count
     post users_url, params: {user: {username: "RicoNasty", email: "rico@nasty.com"}}
     data = @response.parsed_body
     assert data["user"]["username"] == "RicoNasty"
   end
-
-  # TODO: POST create returns an error message if a user already exists
+  
+  test "create returns an error message if a user already exists" do
+    User.create(username: "RicoNasty", email: "rico@nasty.com")
+    post users_url, params: {user: {username: "RicoNasty", email: "rico@nasty.com"}}
+    assert @response.status == 422
+    
+  end
   # TODO: POST create logs the user in on success
 
 
