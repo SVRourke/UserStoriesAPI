@@ -38,13 +38,17 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   test "create returns an error message if a user already exists" do
     User.create(username: "RicoNasty", email: "rico@nasty.com")
     post users_url, params: {user: {username: "RicoNasty", email: "rico@nasty.com"}}
-    assert @response.status == 422
-    
+    assert @response.status == 422    
   end
+
   # TODO: POST create logs the user in on success
 
+  test "show is a valid path" do
+    get user_url(@user.id)
+    data = @response.parsed_body
+    assert (@response.status == 200 && data["user"]["username"] == @user.username)
+  end
 
-  # TODO: read is a valid path
     # TODO: read returns the requested user
     # TODO: read returns an error if no user exists
     # TODO: read returns the requested user if authorized
