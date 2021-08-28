@@ -6,12 +6,10 @@ class UsersController < ApplicationController
     end
 
     def create
-        console.log(params)
         user = User.new(
             username: params["user"]["username"], 
             email: params["user"]["email"]
         )
-
 
         if user.save
             render json: {
